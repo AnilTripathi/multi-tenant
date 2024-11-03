@@ -13,9 +13,6 @@ public class SchemaTenantIdentifierResolver implements CurrentTenantIdentifierRe
 
 	@Override
 	public String resolveCurrentTenantIdentifier() {
-		// Logic to determine the current tenant identifier
-		// This could be based on a ThreadLocal, a request attribute, etc.
-
 		String tenantId = TenantContext.getCurrentTenant();
 		log.info("STIR tenantId = ", tenantId);
 		return (tenantId != null) ? tenantId : DEFAULT_TENANT_ID;

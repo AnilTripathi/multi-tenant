@@ -1,5 +1,7 @@
 package com.multi.schema.config;
 
+import org.springframework.lang.NonNull;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -12,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TenantInterceptor implements HandlerInterceptor {
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+	public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) {
 		String tenantId = request.getHeader("X-TenantID");
 		log.info("tenantId={}", tenantId);
 		TenantContext.setCurrentTenant(tenantId);
@@ -20,8 +22,8 @@ public class TenantInterceptor implements HandlerInterceptor {
 	}
 
 	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
-			Exception ex) {
+	public void afterCompletion(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler,
+			@Nullable Exception ex) {
 		TenantContext.clear();
 	}
 }
